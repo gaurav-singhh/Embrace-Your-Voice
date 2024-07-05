@@ -48,7 +48,7 @@ function Header() {
       active: authStatus,
     },
     {
-      name: "Create Post",
+      name: "Create",
       slug: "/add-post",
       active: authStatus,
     },
