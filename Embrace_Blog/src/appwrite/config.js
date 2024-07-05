@@ -91,7 +91,7 @@ export class Service {
     }
   }
 
-  // file upload service
+
 
   async uploadFile(file) {
     try {
