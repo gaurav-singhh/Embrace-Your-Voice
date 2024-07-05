@@ -49,7 +49,7 @@ export default function PostForm({ post }) {
         if (file) {
           const fileId = file.$id;
           data.FeaturedImange = fileId;
-          console.log(data);
+
           const dbPost = await appwriteService.createPost({
             ...data,
             userId: userData.$id,
@@ -106,9 +106,6 @@ export default function PostForm({ post }) {
           label="Slug :"
           placeholder="Slug"
           className={`mb-4  text-black`}
-          inputClassName={`text-white ${
-            isDarkTheme ? "bg-gray-800" : "bg-white"
-          }`}
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
