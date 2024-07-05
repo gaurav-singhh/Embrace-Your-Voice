@@ -1,12 +1,12 @@
 import React from "react";
 import { Container, Logo, LogoutBtn } from "../index";
-import { NavLink } from "react-router-dom"; // Changed to NavLink
+import { NavLink } from "react-router-dom"; 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   changeThemeToDark,
   changeThemeToLight,
-} from "../../store/darkModeSlice"; // Adjusted import path
+} from "../../store/darkModeSlice"; 
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
@@ -22,9 +22,7 @@ function Header() {
     }
   };
 
-  const handleModeClick = () => {
-    toggleTheme(); // Call toggleTheme function to change theme
-  };
+
 
   const navItems = [
     {
