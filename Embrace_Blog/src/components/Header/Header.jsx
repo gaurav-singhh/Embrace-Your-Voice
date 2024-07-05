@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import {
   changeThemeToDark,
   changeThemeToLight,
-} from "../../store/darkModeSlice"; 
+} from "../../store/darkModeSlice";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
@@ -22,7 +22,9 @@ function Header() {
     }
   };
 
-
+  const handleModeClick = () => {
+    toggleTheme();
+  }; 
 
   const navItems = [
     {
@@ -46,7 +48,7 @@ function Header() {
       active: authStatus,
     },
     {
-      name: "Create",
+      name: "Create Post",
       slug: "/add-post",
       active: authStatus,
     },
