@@ -34,6 +34,7 @@ export class AuthService {
     try {
       console.log(email);
       console.log(password);
+      console.log("****check til here signup to log in****");
       return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
       throw error;
