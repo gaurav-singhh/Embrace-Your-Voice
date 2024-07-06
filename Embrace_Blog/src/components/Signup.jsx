@@ -22,9 +22,11 @@ function Signup() {
       console.log(data);
       const userData = await authService.createAccount(data);
       if (userData) {
-        const curUser = await authService.getCurrentUser();
-        if (curUser) dispatch(login(curUser));
-        navigate("/");
+        const CurUser = await authService.getCurrentUser();
+
+        if (CurUser) dispatch(login(CurUser));
+        console.log("*********Reached after dipatch to authslice***********");
+        console.log(CurUser);
       }
     } catch (error) {
       setError(error.message);
@@ -87,9 +89,7 @@ function Signup() {
                 {...register("name", {
                   required: true,
                 })}
-                className={`${
-                  isDarkTheme ? "bg-white text-black" : "bg-white text-black"
-                }`}
+                className={"text-black"}
               />
               <Input
                 label="Email: "
@@ -115,9 +115,7 @@ function Signup() {
                 {...register("password", {
                   required: true,
                 })}
-                className={`${
-                  isDarkTheme ? "bg-white text-black" : "bg-white text-black"
-                }`}
+                className={"text-black"}
               />
               <Button
                 type="submit"
