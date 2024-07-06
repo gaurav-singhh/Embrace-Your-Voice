@@ -16,7 +16,7 @@ function Footer() {
                 <Logo width="210px" />
               </div>
               <div>
-                <p className="text-sm text-gray-600 px-3">
+                <p className="text-sm text-gray-400 px-3">
                   &copy; Copyright 2024. All Rights Reserved by Gaurav Singh.
                 </p>
               </div>
