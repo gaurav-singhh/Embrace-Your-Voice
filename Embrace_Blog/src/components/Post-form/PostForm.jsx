@@ -25,45 +25,39 @@ export default function PostForm({ post }) {
 
   const submit = async (data) => {
     setLoading(true);
-    try {
-      if (post) {
-        const file = data.image[0]
-          ? await appwriteService.uploadFile(data.image[0])
-          : null;
+    if (post) {
+      const file = data.image[0]
+        ? await appwriteService.uploadFile(data.image[0])
+        : null;
 
-        if (file) {
-          appwriteService.deleteFile(post.FeaturedImange);
-        }
+      if (file) {
+        appwriteService.deleteFile(post.FeaturedImange);
+      }
 
-        const dbPost = await appwriteService.updatePost(post.$id, {
+      const dbPost = await appwriteService.updatePost(post.$id, {
+        ...data,
+        FeaturedImange: file ? file.$id : undefined,
+      });
+
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
+    } else {
+      const file = await appwriteService.uploadFile(data.image[0]);
+
+      if (file) {
+        const fileId = file.$id;
+        data.FeaturedImange = fileId;
+        console.log(data);
+        const dbPost = await appwriteService.createPost({
           ...data,
-          FeaturedImange: file ? file.$id : undefined,
+          userId: userData.$id,
         });
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
-      } else {
-        const file = await appwriteService.uploadFile(data.image[0]);
-
-        if (file) {
-          const fileId = file.$id;
-          data.FeaturedImange = fileId;
-
-          const dbPost = await appwriteService.createPost({
-            ...data,
-            userId: userData.$id,
-          });
-
-          if (dbPost) {
-            navigate(`/post/${dbPost.$id}`);
-          }
-        }
       }
-    } catch (error) {
-      console.error("Error submitting the post", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -106,6 +100,9 @@ export default function PostForm({ post }) {
           label="Slug :"
           placeholder="Slug"
           className={`mb-4  text-black`}
+          inputClassName={`text-white ${
+            isDarkTheme ? "bg-gray-800" : "bg-white"
+          }`}
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -153,15 +150,8 @@ export default function PostForm({ post }) {
           type="submit"
           bgColor={post ? "bg-green-500 hover:bg-green-400" : undefined}
           className="w-full"
-          disabled={loading}
         >
-          {loading
-            ? post
-              ? "Updating..."
-              : "Submitting..."
-            : post
-            ? "Update"
-            : "Submit"}
+          {post ? "Update" : "Submit"}
         </Button>
         {post ? undefined : (
           <div className="w-full mt-4 hidden md:block">
