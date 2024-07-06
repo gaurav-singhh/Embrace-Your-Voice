@@ -59,6 +59,7 @@ export default function PostForm({ post }) {
         }
       }
     }
+    setLoading(false);
   };
 
   const slugTransform = useCallback((value) => {
@@ -151,7 +152,13 @@ export default function PostForm({ post }) {
           bgColor={post ? "bg-green-500 hover:bg-green-400" : undefined}
           className="w-full"
         >
-          {post ? "Update" : "Submit"}
+                   {post
+            ? loading
+              ? "Updating"
+              : "update"
+            : loading
+            ? "Uploading"
+            : "upload"}
         </Button>
         {post ? undefined : (
           <div className="w-full mt-4 hidden md:block">
