@@ -11,7 +11,6 @@ export default function PostForm({ post }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -29,7 +28,8 @@ export default function PostForm({ post }) {
     setError("");
     setLoading(true);
     if (data.title.length >= 36)
-      setError("title length must be under 36 characters");
+      setError(" ❌ Title length must be under 36 characters");
+
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -48,22 +48,30 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
+      console.log("data from create post");
+      console.log(data);
+      console.log(data.image[0]);
       const file = await appwriteService.uploadFile(data.image[0]);
+      console.log(userData.$id);
 
       if (file) {
         const fileId = file.$id;
         data.FeaturedImange = fileId;
-        console.log(data);
+
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
+        console.log("creat post retrn value");
+        console.log(dbPost);
+        console.log(data);
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
       }
     }
+
     setLoading(false);
   };
 
@@ -97,21 +105,18 @@ export default function PostForm({ post }) {
           label="Title :"
           placeholder="Title"
           className={`mb-4  text-black`}
-          inputClassName={`text-white ${
-            isDarkTheme ? "bg-gray-800" : "bg-white"
-          }`}
           {...register("title", { required: true })}
-          
-          {error && <p className="text-red-800 mt-8 text-center">{error}</p>}
-          
         />
+        {error && (
+          <p className="text-red-800 mt-1 bg-red-100 font-medium rounded-sm text-center">
+            {error}
+          </p>
+        )}
+
         <Input
           label="Slug :"
           placeholder="Slug"
           className={`mb-4  text-black`}
-          inputClassName={`text-white ${
-            isDarkTheme ? "bg-gray-800" : "bg-white"
-          }`}
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -124,7 +129,6 @@ export default function PostForm({ post }) {
           name="content"
           control={control}
           defaultValue={getValues("content")}
-          className={`${isDarkTheme ? "text-white" : "text-black"}`}
         />
       </div>
       <div
@@ -160,7 +164,7 @@ export default function PostForm({ post }) {
           bgColor={post ? "bg-green-500 hover:bg-green-400" : undefined}
           className="w-full"
         >
-                   {post
+          {post
             ? loading
               ? "Updating"
               : "update"
