@@ -62,9 +62,11 @@ function Signup() {
           } rounded-r-lg`}
         >
           <div className="mb-2 flex justify-center">
-            <span className="inline-block w-full max-w-[100px]">
-              <Logo width="100%" />
-            </span>
+              <span className="inline-block w-full max-w-[100px]">
+                <NavLink to="/" activeClassName="border-white">
+                  <Logo width="100%" />
+                </NavLink>
+              </span>
           </div>
           <h2 className="text-center text-2xl font-bold leading-tight">
             Sign up to create account
