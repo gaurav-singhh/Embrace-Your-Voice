@@ -5,14 +5,17 @@ import { Button, Input, Logo } from "./index";
 import { useDispatch, useSelector } from "react-redux";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
-import LoginImage from "../Images/Login_Image.png"; // Import the image
+import LoginImage from "../Images/Login_Image.png"; 
+import { NavLink } from "react-router-dom";
+
+
 
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
   const isDarkTheme = useSelector((state) => state.DarkMode.isDarkTheme);
 
   const login = async (data) => {
@@ -28,7 +31,7 @@ function Login() {
     } catch (error) {
       setError(error.message);
     } finally {
-      setLoading(false); // Set loading to false
+      setLoading(false); 
     }
   };
 
@@ -60,7 +63,9 @@ function Login() {
         >
           <div className="mb-2 flex justify-center">
             <span className="inline-block w-full max-w-[100px]">
-              <Logo width="100%" />
+            <NavLink to="/" activeClassName="border-white">
+              <Logo width="100px" />
+            </NavLink>
             </span>
           </div>
           <h2 className="text-center text-2xl font-bold leading-tight">
