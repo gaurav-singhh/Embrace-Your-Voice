@@ -13,7 +13,9 @@ function Footer() {
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
             <div className="flex flex-col items-center md:items-start justify-between h-full">
               <div className="inline-flex items-center mb-4 ml-0 md:ml-[100px]">
-                <Logo width="210px" />
+                <NavLink to="/" activeClassName="border-white">
+              <Logo width="210px" />
+            </NavLink>
               </div>
               <div>
                 <p className="text-sm text-gray-400 px-3">
