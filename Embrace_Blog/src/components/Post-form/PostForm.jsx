@@ -9,6 +9,8 @@ import AddPostImage from "../../Images/AddPost_Image.png";
 export default function PostForm({ post }) {
   const isDarkTheme = useSelector((state) => state.DarkMode.isDarkTheme);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
 
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -96,6 +98,9 @@ export default function PostForm({ post }) {
             isDarkTheme ? "bg-gray-800" : "bg-white"
           }`}
           {...register("title", { required: true })}
+          
+          {error && <p className="text-red-800 mt-8 text-center">{error}</p>}
+          
         />
         <Input
           label="Slug :"
