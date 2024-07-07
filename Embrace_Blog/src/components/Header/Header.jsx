@@ -75,7 +75,7 @@ function Header() {
                         className={({ isActive }) =>
                           ` ${
                             isActive
-                              ? "border-blue-100 rounded-full text-white"
+                              ? "border-white rounded-full text-white"
                               : "text-gray-300"
                           }
                           inline-block px-2 py-2 text-gray-300 border border-transparent hover:border-blue-100 rounded-full`
