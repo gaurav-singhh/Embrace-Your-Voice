@@ -5,7 +5,8 @@ import { login } from "../store/authSlice";
 import { Button, Input, Logo } from "./index.js";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import SignUpImage from "../Images/Signup_image.jpg"; // Import the image
+import SignUpImage from "../Images/Signup_image.jpg"; 
+import { NavLink } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
