@@ -4,6 +4,7 @@ import Logo from "../Logo";
 import Container from "../container/Container";
 import LinkedInLogo from "../../Images/LinkedIn_logo.png";
 import GitHubLogo from "../../Images/GitHub_logo.png";
+import { NavLink } from "react-router-dom"; 
 
 function Footer() {
   return (
